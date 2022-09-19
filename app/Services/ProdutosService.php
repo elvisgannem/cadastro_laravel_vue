@@ -3,10 +3,21 @@
 namespace App\Services;
 
 use App\Models\Produto;
+use Illuminate\Database\Eloquent\Collection;
 use Ramsey\Uuid\Uuid;
 
 class ProdutosService
 {
+
+    public function get(int $id = null): Produto|Collection
+    {
+        if($id) {
+            return Produto::where('id', $id)->first();
+        }
+
+        return Produto::all();
+    }
+
     public function create(array $settings): Produto
     {
         return Produto::create([

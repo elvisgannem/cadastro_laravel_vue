@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\ProdutosService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -10,6 +11,17 @@ class ProdutosController extends Controller
 {
     public function __construct()
     {
+    }
+
+    public function get(int $id = null): JsonResponse
+    {
+        try {
+            return response()->json(
+                (new ProdutosService())->get($id)
+                , 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível obter o(s) produto(s)', 'error_msg' => $error->getMessage()], 400);
+        }
     }
 
     public function create(Request $request)
