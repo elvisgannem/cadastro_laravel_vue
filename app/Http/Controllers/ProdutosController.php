@@ -60,4 +60,17 @@ class ProdutosController extends Controller
             return response()->json(['error' => 'Não foi possível editar o produto', 'error_msg' => $error->getMessage()], 400);
         }
     }
+
+    public function delete(int $id): JsonResponse
+    {
+        try {
+            $delete = (new ProdutosService())->delete($id);
+            if(!$delete) {
+                return response()->json(['error' => 'Não foi possível remover o produto'], 400);
+            }
+            return response()->json(['message' => 'Produto apagado'], 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível remover o produto', 'error_msg' => $error->getMessage()], 400);
+        }
+    }
 }

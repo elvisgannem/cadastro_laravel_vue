@@ -33,4 +33,9 @@ class ProdutosService
     {
         return Produto::where('id', $id)->update($settings);
     }
+
+    public function delete(int $id): bool
+    {
+        return Produto::where('id', $id)->delete();
+    }
 }
