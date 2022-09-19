@@ -48,4 +48,17 @@ class ClientesController extends Controller
             return response()->json(['error' => 'Não foi possível criar o cliente', 'error_msg' => $error->getMessage()], 400);
         }
     }
+
+    public function update(int $id, Request $request): JsonResponse
+    {
+        try {
+            $update = (new ClientesService())->update($request->all(), $id);
+            if(!$update) {
+                return response()->json(['error' => 'Não foi possível editar o cliente'], 400);
+            }
+            return response()->json((new ClientesService())->get($id), 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível editar o cliente', 'error_msg' => $error->getMessage()], 400);
+        }
+    }
 }

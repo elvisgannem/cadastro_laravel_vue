@@ -31,4 +31,9 @@ class ClientesService
             'email' => $settings['email']
         ]);
     }
+
+    public function update(array $settings, int $id): bool
+    {
+        return Cliente::where('id', $id)->update($settings);
+    }
 }

@@ -19,4 +19,5 @@ Route::group(['prefix' => 'clientes'], function () {
     Route::get('/', [ClientesController::class, 'get']);
     Route::get('/{id}', [ClientesController::class, 'get']);
     Route::post('/', [ClientesController::class, 'create']);
+    Route::put('/{id}', [ClientesController::class, 'update']);
 });
