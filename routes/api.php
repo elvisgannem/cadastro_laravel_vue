@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'clientes'], function () {
-   Route::post('/create', [ClientesController::class, 'create']);
+   Route::post('/', [ClientesController::class, 'create']);
 });
