@@ -36,4 +36,9 @@ class ClientesService
     {
         return Cliente::where('id', $id)->update($settings);
     }
+
+    public function delete(int $id): bool
+    {
+        return Cliente::where('id', $id)->delete();
+    }
 }

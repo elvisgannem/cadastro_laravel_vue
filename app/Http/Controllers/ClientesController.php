@@ -61,4 +61,17 @@ class ClientesController extends Controller
             return response()->json(['error' => 'Não foi possível editar o cliente', 'error_msg' => $error->getMessage()], 400);
         }
     }
+
+    public function delete(int $id): JsonResponse
+    {
+        try {
+            $delete = (new ClientesService())->delete($id);
+            if(!$delete) {
+                return response()->json(['error' => 'Não foi possível remover o cliente'], 400);
+            }
+            return response()->json(['message' => 'Cliente apagado'], 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível remover o cliente', 'error_msg' => $error->getMessage()], 400);
+        }
+    }
 }
