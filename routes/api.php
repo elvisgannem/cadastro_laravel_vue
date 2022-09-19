@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ProdutosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,8 @@ Route::group(['prefix' => 'clientes'], function () {
     Route::post('/', [ClientesController::class, 'create']);
     Route::put('/{id}', [ClientesController::class, 'update']);
     Route::delete('/{id}', [ClientesController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'produtos'], function () {
+    Route::post('/', [ProdutosController::class, 'create']);
 });
