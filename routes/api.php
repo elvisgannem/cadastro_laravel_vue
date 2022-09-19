@@ -28,4 +28,5 @@ Route::group(['prefix' => 'produtos'], function () {
     Route::get('/', [ProdutosController::class, 'get']);
     Route::get('/{id}', [ProdutosController::class, 'get']);
     Route::post('/', [ProdutosController::class, 'create']);
+    Route::put('/{id}', [ProdutosController::class, 'update']);
 });

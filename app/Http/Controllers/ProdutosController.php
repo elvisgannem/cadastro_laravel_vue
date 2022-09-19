@@ -24,7 +24,7 @@ class ProdutosController extends Controller
         }
     }
 
-    public function create(Request $request)
+    public function create(Request $request): JsonResponse
     {
         $validated = Validator::make($request->all(), [
             'nome' => 'required',
@@ -45,6 +45,19 @@ class ProdutosController extends Controller
             , 201);
         } catch (\Throwable $error) {
             return response()->json(['error' => 'Não foi possível criar o produto', 'error_msg' => $error->getMessage()], 400);
+        }
+    }
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        try {
+            $update = (new ProdutosService())->update($request->all(), $id);
+            if(!$update) {
+                return response()->json(['error' => 'Não foi possível editar o produto'], 400);
+            }
+            return response()->json((new ProdutosService())->get($id), 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível editar o produto', 'error_msg' => $error->getMessage()], 400);
         }
     }
 }

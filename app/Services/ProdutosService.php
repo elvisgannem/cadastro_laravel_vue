@@ -28,4 +28,9 @@ class ProdutosService
             'valor' => $settings['valor']
         ]);
     }
+
+    public function update(array $settings, int $id): bool
+    {
+        return Produto::where('id', $id)->update($settings);
+    }
 }
