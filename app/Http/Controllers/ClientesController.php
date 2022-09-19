@@ -13,6 +13,17 @@ class ClientesController extends Controller
     {
     }
 
+    public function get(int $id = null): JsonResponse
+    {
+        try {
+            return response()->json(
+                (new ClientesService())->get($id)
+            , 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível obter o(s) cliente(s)', 'error_msg' => $error->getMessage()], 400);
+        }
+    }
+
     public function create(Request $request): JsonResponse
     {
        $validated = Validator::make($request->all(), [
