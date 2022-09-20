@@ -2,7 +2,8 @@
     <div>
         <h3>Clientes</h3>
         <ul v-for="(cliente, index) in clientes" :key="index">
-            <li>{{cliente.nome}} - {{cliente.cpf}} - {{cliente.sexo}} - {{cliente.email}}</li>
+            <li>{{cliente.nome}} - {{cliente.cpf}} - {{cliente.sexo}} - {{cliente.email}} <button id="delete-btn" @click="deleteClient(cliente.id)">APAGAR</button></li>
+
         </ul>
     </div>
 
@@ -43,6 +44,10 @@ export default {
       getClients(){
           axios.get('http://localhost/api/clientes')
               .then(response => this.clientes = response.data)
+      },
+      deleteClient(id) {
+          axios.delete(`http://localhost/api/clientes/${id}`)
+              .then(response => this.getClients())
       }
     },
     mounted () {
@@ -77,6 +82,15 @@ input {
     height: 35px;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
+}
+#delete-btn {
+    border: none;
+    background: darkred;
+    color: white;
+    font-weight: bold;
+    height: 25px;
+    border-radius: 5px;
     cursor: pointer;
 }
 </style>
