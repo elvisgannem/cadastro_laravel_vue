@@ -55,4 +55,18 @@ class PedidosController extends Controller
             return response()->json(['error' => 'Não foi possível criar o pedido', 'error_msg' => $error->getMessage()], 400);
         }
     }
+
+    public function update(Request $request, int $id): JsonResponse
+    {
+        try {
+            $pedidos_service = new PedidosService();
+            $update = $pedidos_service->update($request->all(), $id);
+            if(!$update) {
+                return response()->json(['error' => 'Não foi possível atualizar'], 400);
+            }
+            return response()->json($pedidos_service->get($id), 200);
+        } catch (\Throwable $error) {
+            return response()->json(['error' => 'Não foi possível editar o pedido', 'error_msg' => $error->getMessage()], 400);
+        }
+    }
 }

@@ -36,6 +36,20 @@ class PedidosService
         ]);
     }
 
+    public function update(array $settings, int $id): bool
+    {
+        if(isset($settings['pedidos'])) {
+            $products_exists = $this->validateIfProductExists($settings['pedidos']);
+
+            if(!$products_exists) {
+                return false;
+            }
+            $settings['obj_pedidos'] = json_encode($settings['pedidos']);
+            unset($settings['pedidos']);
+        }
+        return Pedido::where('id', $id)->update($settings);
+    }
+
     public function validateIfClientExists(int $client_id): bool
     {
         return Cliente::where('id', $client_id)->count();
