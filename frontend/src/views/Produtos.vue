@@ -2,7 +2,8 @@
     <div>
         <h3>Produtos</h3>
         <ul v-for="(product, index) in products" :key="index">
-            <li>{{ product.nome }} - {{ product.cor }} - {{ product.tamanho }} - R$ {{ product.valor }}</li>
+            <li>{{ product.nome }} - {{ product.cor }} - {{ product.tamanho }} - R$ {{ product.valor }}
+                <button id="delete-btn" @click="deleteProduct(product.id)">APAGAR</button></li>
         </ul>
     </div>
 
@@ -40,6 +41,10 @@ export default {
                 .then(response => {
                     this.getProducts()
                 })
+        },
+        deleteProduct(id){
+            axios.delete(`http://localhost/api/produtos/${id}`)
+                .then(response => this.getProducts())
         }
     },
     mounted() {
@@ -74,6 +79,15 @@ input {
     height: 35px;
     border-radius: 5px;
     font-weight: bold;
+    cursor: pointer;
+}
+#delete-btn {
+    border: none;
+    background: darkred;
+    color: white;
+    font-weight: bold;
+    height: 25px;
+    border-radius: 5px;
     cursor: pointer;
 }
 </style>
