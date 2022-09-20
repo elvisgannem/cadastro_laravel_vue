@@ -2,9 +2,9 @@
     <nav>
         <h2>CadastroApp</h2>
         <ul>
-            <li>Clientes</li>
-            <li>Produtos</li>
-            <li>Pedidos</li>
+            <router-link to="/"><li>Clientes</li></router-link>
+            <router-link to="/produtos"><li>Produtos</li></router-link>
+            <router-link to="/pedidos"><li>Pedidos</li></router-link>
         </ul>
     </nav>
 </template>
