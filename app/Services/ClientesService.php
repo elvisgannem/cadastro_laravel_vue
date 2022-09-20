@@ -12,7 +12,7 @@ class ClientesService
     {
     }
 
-    public function get(int $id = null): Cliente|Collection
+    public function get(int $id = null): Cliente|Collection|null
     {
         if($id) {
             return Cliente::where('id', $id)->first();

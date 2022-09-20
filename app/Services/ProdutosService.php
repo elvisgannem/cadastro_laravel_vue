@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 class ProdutosService
 {
 
-    public function get(int $id = null): Produto|Collection
+    public function get(int $id = null): Produto|Collection|null
     {
         if($id) {
             return Produto::where('id', $id)->first();

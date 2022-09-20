@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\PedidosController;
 use App\Http\Controllers\ProdutosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,4 +31,10 @@ Route::group(['prefix' => 'produtos'], function () {
     Route::post('/', [ProdutosController::class, 'create']);
     Route::put('/{id}', [ProdutosController::class, 'update']);
     Route::delete('/{id}', [ProdutosController::class, 'delete']);
+});
+
+Route::group(['prefix' => 'pedidos'], function () {
+    Route::get('/', [PedidosController::class, 'get']);
+    Route::get('/{id}', [PedidosController::class, 'get']);
+    Route::post('/', [PedidosController::class, 'create']);
 });
