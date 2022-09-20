@@ -6,11 +6,11 @@
         </ul>
     </div>
 
-    <form>
-        <input type="text" placeholder="Nome">
-        <input type="email" placeholder="Email">
-        <input type="text" placeholder="CPF">
-        <select name="" id="">
+    <form @submit.prevent="submitClient">
+        <input type="text" placeholder="Nome" v-model="newClient.nome">
+        <input type="email" placeholder="Email" v-model="newClient.email">
+        <input type="text" placeholder="CPF" v-model="newClient.cpf">
+        <select v-model="newClient.sexo">
             <option value="H">Homem</option>
             <option value="M">Mulher</option>
         </select>
@@ -24,8 +24,19 @@ export default {
     name: "Clientes",
     data() {
         return {
-            clientes: null
+            clientes: null,
+            newClient: {
+                nome: '',
+                email: '',
+                cpf: '',
+                sexo: 'H'
+            }
         }
+    },
+    methods: {
+      submitClient(){
+          axios.post('http://localhost/api/clientes', this.newClient)
+      }
     },
     mounted () {
         axios.get('http://localhost/api/clientes')
