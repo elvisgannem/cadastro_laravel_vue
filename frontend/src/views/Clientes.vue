@@ -1,7 +1,7 @@
 <template>
     <div>
         <h3>Clientes</h3>
-        <ul v-for="cliente in clientes">
+        <ul v-for="(cliente, index) in clientes" :key="index">
             <li>{{cliente.nome}} - {{cliente.cpf}} - {{cliente.sexo}} - {{cliente.email}}</li>
         </ul>
     </div>
@@ -36,11 +36,17 @@ export default {
     methods: {
       submitClient(){
           axios.post('http://localhost/api/clientes', this.newClient)
+              .then(response => {
+                  this.getClients()
+              })
+      },
+      getClients(){
+          axios.get('http://localhost/api/clientes')
+              .then(response => this.clientes = response.data)
       }
     },
     mounted () {
-        axios.get('http://localhost/api/clientes')
-            .then(response => this.clientes = response.data)
+        this.getClients()
     }
 }
 </script>
