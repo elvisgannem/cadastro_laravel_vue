@@ -55,6 +55,23 @@ class PedidosService
         return Pedido::where('id', $id)->delete();
     }
 
+    public function getDetails(int $id): array
+    {
+        $pedido = $this->get($id);
+        $products_array = [];
+        foreach (json_decode($pedido->obj_pedidos) as $product_id) {
+            $product = Produto::where('id', $product_id)->first();
+            $products_array[] = $product;
+        }
+
+        $valor = 0;
+        foreach ($products_array as $product) {
+            $valor += $product->valor;
+        }
+        $products_array['total_value'] = $valor;
+        return $products_array;
+    }
+
     public function validateIfClientExists(int $client_id): bool
     {
         return Cliente::where('id', $client_id)->count();
