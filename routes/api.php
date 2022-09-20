@@ -38,4 +38,5 @@ Route::group(['prefix' => 'pedidos'], function () {
     Route::get('/{id}', [PedidosController::class, 'get']);
     Route::post('/', [PedidosController::class, 'create']);
     Route::put('/{id}', [PedidosController::class, 'update']);
+    Route::delete('/{id}', [PedidosController::class, 'delete']);
 });

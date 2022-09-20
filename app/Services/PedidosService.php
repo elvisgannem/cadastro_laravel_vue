@@ -50,6 +50,11 @@ class PedidosService
         return Pedido::where('id', $id)->update($settings);
     }
 
+    public function delete(int $id): bool
+    {
+        return Pedido::where('id', $id)->delete();
+    }
+
     public function validateIfClientExists(int $client_id): bool
     {
         return Cliente::where('id', $client_id)->count();
