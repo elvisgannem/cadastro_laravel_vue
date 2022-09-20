@@ -21,7 +21,13 @@ class PedidosService
         if($id) {
             return Pedido::where('id', $id)->first();
         }
-        return Pedido::all();
+        $pedidos = Pedido::all();
+
+        for ($i = 0; $i < count($pedidos); $i++) {
+            $pedidos[$i]->item = Produto::where('id', json_decode($pedidos[$i]->obj_pedidos)[0])->first();
+        }
+
+        return $pedidos;
     }
 
     public function create(array $settings): Pedido
